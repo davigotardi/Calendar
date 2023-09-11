@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="calendarBlock" style="width:300px; margin:auto; border:1px solid black; padding:10px;">
+            <h1 style="text-align:center;">Calendar</h1>
+            <table id="calendar" style="width:100%;">
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </table>
+        </div>
+        <script>
+            window.onload = function() {
+                let date = new Date();
+                let month = date.getMonth();
+                let year = date.getFullYear();
+                let firstDay = (new Date(year, month)).getDay();
+
+                let calendar = document.getElementById('calendar');
+
+                let dateOfMonth = 1;
+                let trTag = document.createElement('tr');
+
+                // Adding previous month's extra dates
+                for (let i = 0; i < firstDay; i++) {
+                    let tdTag = document.createElement('td');
+                    trTag.appendChild(tdTag);
+                }
+
+                // Adding current month's dates
+                month++;
+                while (dateOfMonth <= new Date(year, month, 0).getDate()) {
+                    if (firstDay != 0 && firstDay % 7 == 0) {
+                        calendar.appendChild(trTag); // attaching week row to calendar
+                        trTag = document.createElement('tr'); // creating new week row for next dates
+                        firstDay = 0;
+                    }
+                    let tdTag = document.createElement('td');
+                    tdTag.textContent = dateOfMonth;
+                    trTag.appendChild(tdTag);
+                    dateOfMonth++;
+                    firstDay++;
+                }
+
+                // Adding next month's extra dates
+                for (let i = firstDay; i<7; i++) {
+                    let tdTag = document.createElement('td');
+                    trTag.appendChild(tdTag);
+                }
+
+                calendar.appendChild(trTag); // attaching last week row to calendar
+            }
+        </script>
+    </body>
+</html>
