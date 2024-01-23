@@ -27,13 +27,13 @@
                 let dateOfMonth = 1;
                 let trTag = document.createElement('tr');
 
-                // Adding previous month's extra dates
+                
                 for (let i = 0; i < firstDay; i++) {
                     let tdTag = document.createElement('td');
                     trTag.appendChild(tdTag);
                 }
 
-                // Adding current month's dates
+                
                 month++;
                 while (dateOfMonth <= new Date(year, month, 0).getDate()) {
                     if (firstDay != 0 && firstDay % 7 == 0) {
@@ -48,7 +48,7 @@
                     firstDay++;
                 }
 
-                // Adding next month's extra dates
+                
                 for (let i = firstDay; i<7; i++) {
                     let tdTag = document.createElement('td');
                     trTag.appendChild(tdTag);
